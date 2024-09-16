@@ -5,7 +5,6 @@ import 'package:chakra/screens/Pairingmode.dart';
 import 'package:chakra/screens/Records.dart';
 import 'package:chakra/screens/Analysis.dart';
 
-
 class Chakra extends StatefulWidget {
   const Chakra({super.key});
 
@@ -23,7 +22,7 @@ class _ChakraState extends State<Chakra> {
         width: screenWidth,
         height: screenHeight,
         clipBehavior: Clip.antiAlias,
-        decoration: BoxDecoration(color: Colors.black),
+        decoration: const BoxDecoration(color: Colors.black),
         child: Stack(
           children: [
             Positioned(
@@ -37,7 +36,7 @@ class _ChakraState extends State<Chakra> {
                       screenWidth * 0.52, // Width adjusted relative to screen
                   height:
                       screenHeight * 0.24, // Height adjusted relative to screen
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/logo.png'),
                       fit: BoxFit.fill,
@@ -49,7 +48,7 @@ class _ChakraState extends State<Chakra> {
             Positioned(
               left: screenWidth * 0.13,
               top: screenHeight * 0.45,
-              child: Container(
+              child: SizedBox(
                 width: screenWidth * 0.73,
                 height: screenHeight * 0.08,
                 child: Stack(
@@ -61,7 +60,7 @@ class _ChakraState extends State<Chakra> {
                         height: screenHeight * 0.08,
                         decoration: ShapeDecoration(
                           shape: RoundedRectangleBorder(
-                            side: BorderSide(
+                            side: const BorderSide(
                                 width: 5,
                                 color: Color.fromARGB(255, 240, 190, 190)),
                             borderRadius: BorderRadius.circular(53),
@@ -87,11 +86,10 @@ class _ChakraState extends State<Chakra> {
                           child: Text(
                             'Pair your Chakra',
                             style: TextStyle(
-                              color: Colors.white,
-                              fontSize: screenWidth * 0.065,
-                              fontFamily: 'Esteban',
-                              fontWeight: FontWeight.w600
-                            ),
+                                color: Colors.white,
+                                fontSize: screenWidth * 0.065,
+                                fontFamily: 'Esteban',
+                                fontWeight: FontWeight.w600),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -101,7 +99,9 @@ class _ChakraState extends State<Chakra> {
                 ),
               ),
             ),
-            ButtonRow(onPressedChakra: (){}, onPressedRecords: (){}, onPressedAnalysis: (){}, screenHeight: screenHeight, screenWidth: screenWidth)
+            ButtonRow(
+                screenHeight: screenHeight,
+                screenWidth: screenWidth)
           ],
         ),
       ),

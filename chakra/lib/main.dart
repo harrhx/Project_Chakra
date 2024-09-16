@@ -4,7 +4,7 @@ import "package:chakra/mainscreen.dart";
 
 
 void main(){
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: Mainscreen(),
   ));
 }

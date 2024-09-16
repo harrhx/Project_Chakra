@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Recordscreen extends StatelessWidget {
+  const Recordscreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Text(
           'Hello World',

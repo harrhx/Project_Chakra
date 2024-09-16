@@ -63,7 +63,7 @@ class _SplashState extends State<Splash> {
 
 Route _createRoute() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => Chakra(),
+    pageBuilder: (context, animation, secondaryAnimation) => const Chakra(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = 0.0;
       const end = 1.0;
