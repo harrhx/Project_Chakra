@@ -1,12 +1,9 @@
-import 'package:chakra/Widgets/theCRA.dart';
-import 'package:chakra/screens/records.dart';
 import 'package:flutter/material.dart';
-import 'package:chakra/screens/Pairingmode.dart';
-import 'package:chakra/screens/Records.dart';
-import 'package:chakra/screens/Analysis.dart';
+import 'dart:ui'; // Import this for the blur effect
 
 class Chakra extends StatefulWidget {
-  const Chakra({super.key});
+  final Function onPressedPairingmode;
+  const Chakra({super.key, required this.onPressedPairingmode});
 
   @override
   _ChakraState createState() => _ChakraState();
@@ -55,42 +52,38 @@ class _ChakraState extends State<Chakra> {
                   children: [
                     Align(
                       alignment: Alignment.center,
-                      child: Container(
-                        width: screenWidth * 0.73,
-                        height: screenHeight * 0.08,
-                        decoration: ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                                width: 5,
-                                color: Color.fromARGB(255, 240, 190, 190)),
-                            borderRadius: BorderRadius.circular(53),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(53),
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(
+                            sigmaX: 10.0, // Horizontal blur intensity
+                            sigmaY: 10.0, // Vertical blur intensity
                           ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      //left: screenWidth * 0.1,
-                      //top: screenHeight * 0.02,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Pairingmode()),
-                          );
-                        },
-                        child: SizedBox(
-                          width: screenWidth * 0.53,
-                          height: screenHeight * 0.05,
-                          child: Text(
-                            'Pair your Chakra',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: screenWidth * 0.065,
-                                fontFamily: 'Esteban',
-                                fontWeight: FontWeight.w600),
-                            textAlign: TextAlign.center,
+                          child: Container(
+                            width: screenWidth * 0.73,
+                            height: screenHeight * 0.08,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(53),
+                            ),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: GestureDetector(
+                                onTap: () {
+                                  widget.onPressedPairingmode();
+                                },
+                                child: Text(
+                                  'Pair your Chakra',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: screenWidth * 0.065,
+                                    fontFamily: 'Esteban',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -99,9 +92,6 @@ class _ChakraState extends State<Chakra> {
                 ),
               ),
             ),
-            ButtonRow(
-                screenHeight: screenHeight,
-                screenWidth: screenWidth)
           ],
         ),
       ),

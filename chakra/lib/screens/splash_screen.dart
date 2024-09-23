@@ -1,12 +1,11 @@
 import "package:flutter/material.dart";
-import "package:chakra/screens/chakra.dart";
 import 'dart:async';
+import 'package:chakra/mainscreen.dart';
 
 
 class Splash extends StatefulWidget {
-  final double screenwidth;
-  final double screenheight;
-  const Splash({super.key,required this.screenwidth,required this.screenheight});
+
+  const Splash({super.key});
 
   @override
   _SplashState createState() => _SplashState();
@@ -27,6 +26,8 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
+  final screenwidth = MediaQuery.of(context).size.width;
+  final screenheight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
   width: 430,
@@ -40,11 +41,11 @@ class _SplashState extends State<Splash> {
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       Positioned(
-              left: widget.screenwidth * 0.24, // Relative positioning for responsiveness
-              top: widget.screenheight * 0.38,
+              left: screenwidth * 0.24, // Relative positioning for responsiveness
+              top: screenheight * 0.38,
               child: Container(
-                width: widget.screenwidth * 0.52, // Width adjusted relative to screen
-                height: widget.screenheight * 0.24, // Height adjusted relative to screen
+                width: screenwidth * 0.52, // Width adjusted relative to screen
+                height: screenheight * 0.24, // Height adjusted relative to screen
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/logo.png'),
@@ -63,7 +64,7 @@ class _SplashState extends State<Splash> {
 
 Route _createRoute() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const Chakra(),
+    pageBuilder: (context, animation, secondaryAnimation) => const Mainscreen(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = 0.0;
       const end = 1.0;
