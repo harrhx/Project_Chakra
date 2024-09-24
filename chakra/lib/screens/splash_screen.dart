@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:chakra/screens/chakra.dart";
 import 'dart:async';
 import 'package:chakra/mainscreen.dart';
 
@@ -40,20 +41,19 @@ class _SplashState extends State<Splash> {
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
-      Positioned(
-              left: screenwidth * 0.24, // Relative positioning for responsiveness
-              top: screenheight * 0.38,
-              child: Container(
-                width: screenwidth * 0.52, // Width adjusted relative to screen
-                height: screenheight * 0.24, // Height adjusted relative to screen
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/logo.png'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
+      Align(
+        alignment: Alignment.center,
+        child: Container(
+          width: screenwidth * 0.52, // Width adjusted relative to screen
+          height: screenheight * 0.24, // Height adjusted relative to screen
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/logo.png'),
+              fit: BoxFit.fill,
             ),
+          ),
+        ),
+      ),
     ],
   ),
 )

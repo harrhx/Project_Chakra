@@ -47,11 +47,11 @@ class _MainScreenState extends State<Mainscreen> {
           if (mainscreen == "Chakra") 
             Chakra(onPressedPairingmode: onPressedPairingmode),
           if (mainscreen == "Records") 
-            const Recordscreen(),
+            Recordscreen(),
           if (mainscreen == "Analysis") 
-            const Analysis(),
+            Analysis(),
           if (mainscreen == "Pairingmode") 
-            const PairingModeScreen(),
+            PairingModeScreen(),
           ButtonRow(screenHeight: screenHeight, screenWidth: screenWidth, onPressedChakra: onPressedChakra, onPressedRecords: onPressedRecords, onPressedAnalysis: onPressedAnalysis)
         ],
       ),

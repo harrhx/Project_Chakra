@@ -65,7 +65,7 @@ class _RecordscreenState extends State<Recordscreen> {
           children: [
             Container(
               child: isLoading
-                  ? const Center(child: CircularProgressIndicator())
+                  ? Center(child: CircularProgressIndicator())
                   : ListView.builder(
                       itemCount: healthData.length,
                       itemBuilder: (context, index) {

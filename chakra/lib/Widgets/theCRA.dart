@@ -1,17 +1,23 @@
 import 'package:chakra/screens/Analysis.dart';
 import 'package:flutter/material.dart';
-import 'package:chakra/screens/Analysis.dart';
+import 'dart:ui'; // Import this to use BackdropFilter
 import 'package:chakra/screens/records.dart';
 import 'package:chakra/screens/chakra.dart';
 
 class ButtonRow extends StatefulWidget {
   final double screenHeight;
   final double screenWidth;
+  final Function onPressedChakra;
+  final Function onPressedRecords;
+  final Function onPressedAnalysis;
 
   const ButtonRow({
     super.key,
     required this.screenHeight,
     required this.screenWidth,
+    required this.onPressedChakra,
+    required this.onPressedRecords,
+    required this.onPressedAnalysis,
   });
 
   @override
@@ -19,57 +25,43 @@ class ButtonRow extends StatefulWidget {
 }
 
 class _ButtonRowState extends State<ButtonRow> {
-  void onPressedChakra() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Chakra(),
-      ),
-    );
-  }
-
-  void onPressedRecords() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Recordscreen(),
-      ),
-    );
-  }
   
-  void onPressedAnalysis() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Analysis(),
-      ),
-    );
-  }
-
 
   @override
   Widget build(BuildContext context) {
+    final widthScale = widget.screenWidth / 430; // iPhone 15 Pro Max width
+    final heightScale = widget.screenHeight / 932; // iPhone 15 Pro Max height
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
-        padding: EdgeInsets.only(bottom: widget.screenHeight * 0.03),
+        padding: EdgeInsets.only(
+            bottom: widget.screenHeight * 0.02, top: widget.screenHeight * 0.02,left: widthScale * 5,right: widthScale * 5),
         child: SizedBox(
           width: widget.screenWidth * 0.94,
           height: widget.screenHeight * 0.08,
           child: Stack(
             children: [
-              Container(
-                width: widget.screenWidth * 0.94,
-                height: widget.screenHeight * 0.08,
-                decoration: ShapeDecoration(
-                  color: const Color.fromARGB(255, 124, 123, 123).withOpacity(0.3),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(70),
+              // BackdropFilter added to the bottom-most container
+              ClipRRect(
+                borderRadius: BorderRadius.circular(70), // Match container shape
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), // Blur intensity
+                  child: Container(
+                    width: widget.screenWidth * 0.94,
+                    height: widget.screenHeight * 0.08,
+                    decoration: ShapeDecoration(
+                      color: const Color.fromARGB(255, 124, 123, 123).withOpacity(0.3),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(70),
+                      ),
+                    ),
                   ),
                 ),
               ),
               GestureDetector(
-                onTap: onPressedChakra,
+                onTap: (){
+                  widget.onPressedChakra();
+                },
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
@@ -78,7 +70,7 @@ class _ButtonRowState extends State<ButtonRow> {
                       width: widget.screenWidth * 0.28,
                       height: widget.screenHeight * 0.05,
                       decoration: ShapeDecoration(
-                        color: const Color.fromARGB(126, 255, 0, 0),
+                        color: const Color.fromARGB(125, 255, 255, 255),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40),
                         ),
@@ -88,9 +80,9 @@ class _ButtonRowState extends State<ButtonRow> {
                           'Chakra',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
+                            color: Color.fromARGB(255, 0, 0, 0),
                             fontSize: 20,
-                            fontFamily: 'Faustina',
+                            fontFamily: 'Roboto Condensed',
                             fontWeight: FontWeight.w600,
                             height: 0.06,
                             letterSpacing: 2,
@@ -102,14 +94,16 @@ class _ButtonRowState extends State<ButtonRow> {
                 ),
               ),
               GestureDetector(
-                onTap: onPressedRecords,
+                onTap: (){
+                  widget.onPressedRecords();
+                },
                 child: Align(
                   alignment: Alignment.center,
                   child: Container(
                     width: widget.screenWidth * 0.28,
                     height: widget.screenHeight * 0.05,
                     decoration: ShapeDecoration(
-                      color: const Color.fromARGB(126, 255, 0, 0),
+                      color: const Color.fromARGB(125, 255, 255, 255),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40),
                       ),
@@ -119,9 +113,9 @@ class _ButtonRowState extends State<ButtonRow> {
                         'Records',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
+                          color: Color.fromARGB(255, 0, 0, 0),
                           fontSize: 20,
-                          fontFamily: 'Faustina',
+                          fontFamily: 'Roboto Condensed',
                           fontWeight: FontWeight.w600,
                           height: 0.06,
                           letterSpacing: 2,
@@ -132,7 +126,9 @@ class _ButtonRowState extends State<ButtonRow> {
                 ),
               ),
               GestureDetector(
-                onTap: onPressedAnalysis,
+                onTap: (){
+                  widget.onPressedAnalysis();
+                },
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Padding(
@@ -141,7 +137,7 @@ class _ButtonRowState extends State<ButtonRow> {
                       width: widget.screenWidth * 0.28,
                       height: widget.screenHeight * 0.05,
                       decoration: ShapeDecoration(
-                        color: const Color.fromARGB(126, 255, 0, 0),
+                        color: const Color.fromARGB(125, 255, 255, 255),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40),
                         ),
@@ -151,9 +147,9 @@ class _ButtonRowState extends State<ButtonRow> {
                           'Analysis',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
+                            color: Color.fromARGB(255, 0, 0, 0),
                             fontSize: 20,
-                            fontFamily: 'Faustina',
+                            fontFamily: 'Roboto Condensed',
                             fontWeight: FontWeight.w600,
                             height: 0.06,
                             letterSpacing: 2,

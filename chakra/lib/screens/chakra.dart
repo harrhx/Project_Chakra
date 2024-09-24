@@ -1,4 +1,6 @@
+import 'package:chakra/Widgets/theCRA.dart';
 import 'package:flutter/material.dart';
+import 'package:chakra/screens/Pairingmode.dart';
 import 'dart:ui'; // Import this for the blur effect
 
 class Chakra extends StatefulWidget {

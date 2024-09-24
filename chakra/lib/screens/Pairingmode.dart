@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:chakra/Widgets/pairingModeWidget.dart';
-//import 'package:flutter_blue/flutter_blue.dart';
+
 
 class PairingModeScreen extends StatefulWidget {
   const PairingModeScreen({super.key});
@@ -10,6 +11,7 @@ class PairingModeScreen extends StatefulWidget {
 }
 
 class _PairingModeScreenState extends State<PairingModeScreen> {
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -18,8 +20,7 @@ class _PairingModeScreenState extends State<PairingModeScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
-        child: const PairingModeWidget() // Show the pairing widget while scanning
-            
+        child: PairingModeWidget() // Show the pairing widget while scanning  
       ),
     );
   }

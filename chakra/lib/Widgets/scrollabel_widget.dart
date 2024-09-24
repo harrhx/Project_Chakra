@@ -1,51 +1,47 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-class ScrollableList extends StatefulWidget {
+class ScrollableList extends StatelessWidget {
   final double heightScale;
   final double widthScale;
   final double screenHeight;
   final double screenWidth;
   final double containerOpacity;
-  const ScrollableList(
-      {Key? key,
-      required this.heightScale,
-      required this.widthScale,
-      required this.screenHeight,
-      required this.screenWidth,
-      required this.containerOpacity})
-      : super(key: key);
+  final dynamic record; // Accepting record as a parameter
 
-  @override
-  _ScrollableListState createState() => _ScrollableListState();
-}
+  const ScrollableList({
+    super.key,
+    required this.heightScale,
+    required this.widthScale,
+    required this.screenHeight,
+    required this.screenWidth,
+    required this.containerOpacity,
+    required this.record,
+  });
 
-class _ScrollableListState extends State<ScrollableList> {
   @override
   Widget build(BuildContext context) {
-    double heightScale = widget.heightScale;
-    double widthScale = widget.widthScale;
-    double screenHeight = widget.screenHeight;
-    double screenWidth = widget.screenWidth;
-    double containerOpacity = widget.containerOpacity;
+    String date = DateFormat('yyyy-MM-dd').format(DateTime.parse(record['data_date'].toString()));
     return Opacity(
-      opacity: containerOpacity,
+      opacity: 1,
       child: Container(
         margin: EdgeInsets.symmetric(
             horizontal: 5 * widthScale, vertical: 10 * heightScale),
-        width: screenWidth, // Adjust container width based on screen size
-        height:
-            95 * heightScale, // Adjust container height based on screen height
+        width: screenWidth,
+        height: 95 * heightScale,
         decoration: ShapeDecoration(
-          color: const Color(0xCCBAE2B8),
+          color: (record['status'] == 'normal')
+              ? const Color.fromARGB(255, 226, 255, 242)
+              : const Color.fromARGB(255, 255, 214, 214),
           shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.circular(70 * widthScale), // Adjust border radius
+            borderRadius: BorderRadius.circular(70 * widthScale),
           ),
         ),
         child: Column(
           children: [
+            // Date, Time, and Status Row
             Row(
               children: [
                 Padding(
@@ -54,7 +50,7 @@ class _ScrollableListState extends State<ScrollableList> {
                     top: 15 * heightScale,
                   ),
                   child: Text(
-                    '21-09-2024',
+                    date, // Accessing record data
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
@@ -67,11 +63,11 @@ class _ScrollableListState extends State<ScrollableList> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    left: 10 * widthScale,
+                    left: 5 * widthScale,
                     top: 20 * heightScale,
                   ),
                   child: Text(
-                    '12:46:35',
+                    record['data_time'].toString(), // Accessing record data
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
@@ -87,14 +83,16 @@ class _ScrollableListState extends State<ScrollableList> {
                     alignment: Alignment.topRight,
                     child: Padding(
                       padding: EdgeInsets.only(
-                        right: 30 * widthScale,
-                        top: 20 * heightScale,
+                        right: 25 * widthScale,
+                        top: 15 * heightScale,
                       ),
                       child: Text(
-                        'NORMAL',
+                        record['status'].toUpperCase().toString(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: const Color(0xFF006E0C),
+                          color: record['status'] == 'normal'
+                              ? const Color(0xFF006E0C)
+                              : Colors.red,
                           fontSize: 15 * widthScale,
                           fontFamily: 'Roboto Condensed',
                           fontWeight: FontWeight.w800,
@@ -106,11 +104,12 @@ class _ScrollableListState extends State<ScrollableList> {
                 ),
               ],
             ),
+            // Body Temperature, SpO2, and Heart Rate Row
             Row(
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                    left: 28 * widthScale,
+                    left: 25 * widthScale,
                     top: 2 * heightScale,
                   ),
                   child: Text.rich(
@@ -120,13 +119,13 @@ class _ScrollableListState extends State<ScrollableList> {
                           text: ' °F - ',
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 18 * widthScale,
+                            fontSize: 20 * widthScale,
                             fontFamily: 'Roboto Condensed',
                             fontWeight: FontWeight.w800,
                           ),
                         ),
                         TextSpan(
-                          text: '98',
+                          text: record['body_temperature'].toString(), // Accessing record data
                           style: TextStyle(
                             color: const Color(0xFF00728C),
                             fontSize: 20 * widthScale,
@@ -139,7 +138,7 @@ class _ScrollableListState extends State<ScrollableList> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Align(
                   alignment: Alignment.center,
                   child: Text.rich(
@@ -155,7 +154,7 @@ class _ScrollableListState extends State<ScrollableList> {
                           ),
                         ),
                         TextSpan(
-                          text: '99',
+                          text: record['spo2'].toString(), // Accessing record data
                           style: TextStyle(
                             color: const Color(0xFF009C17),
                             fontSize: 20 * widthScale,
@@ -177,10 +176,10 @@ class _ScrollableListState extends State<ScrollableList> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
                   padding: EdgeInsets.only(
-                    right: 28 * widthScale,
+                    right: 30 * widthScale,
                     top: 2 * heightScale,
                   ),
                   child: Text.rich(
@@ -196,7 +195,7 @@ class _ScrollableListState extends State<ScrollableList> {
                           ),
                         ),
                         TextSpan(
-                          text: '74',
+                          text: record['heartrate'].toString(), // Accessing record data
                           style: TextStyle(
                             color: const Color(0xFF009C17),
                             fontSize: 20 * widthScale,
