@@ -21,7 +21,6 @@ dependencies:
   provider: ^6.0.0
   sqflite: ^2.0.0
   get: ^4.6.5
-  flutter_bloc: ^8.0.1
 ```
 
 ### Flutter Packages
@@ -50,12 +49,6 @@ dependencies:
      flutter pub add get
      ```
 
-5. **`flutter_bloc`**: For efficient state management.
-   - Installation: 
-     ```bash
-     flutter pub add flutter_bloc
-     ```
-
 ### Raspberry Pi Pico W Setup
 - Flash the necessary firmware on the Raspberry Pi Pico W to enable BLE communication.
 - Connect sensors to monitor SpO2, body temperature, and heart rate.
@@ -66,7 +59,7 @@ dependencies:
 ### 1. Clone the Repository
 To start with the project, clone the GitHub repository to your local machine:
 ```bash
-git clone https://github.com/your-username/project-chakra.git
+git clone https://github.com/harrhx/project-chakra.git
 cd project-chakra
 ```
 
