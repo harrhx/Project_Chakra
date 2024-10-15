@@ -43,7 +43,7 @@ class _ButtonRowState extends State<ButtonRow> {
             children: [
               // BackdropFilter added to the bottom-most container
               ClipRRect(
-                borderRadius: BorderRadius.circular(70), // Match container shape
+                borderRadius: BorderRadius.circular(30), // Match container shape
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), // Blur intensity
                   child: Container(
@@ -52,7 +52,7 @@ class _ButtonRowState extends State<ButtonRow> {
                     decoration: ShapeDecoration(
                       color: const Color.fromARGB(255, 124, 123, 123).withOpacity(0.3),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(70),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                     ),
                   ),

@@ -33,10 +33,10 @@ class ScrollableList extends StatelessWidget {
         height: 95 * heightScale,
         decoration: ShapeDecoration(
           color: (record['status'] == 'normal')
-              ? const Color.fromARGB(255, 226, 255, 242)
-              : const Color.fromARGB(255, 255, 214, 214),
+              ? const Color.fromARGB(200, 226, 255, 242)
+              : const Color.fromARGB(200, 255, 214, 214),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(70 * widthScale),
+            borderRadius: BorderRadius.circular(30 * widthScale),
           ),
         ),
         child: Column(

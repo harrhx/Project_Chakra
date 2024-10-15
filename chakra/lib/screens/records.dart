@@ -16,17 +16,21 @@ class Recordscreen extends StatefulWidget {
 class _RecordscreenState extends State<Recordscreen> {
   List<dynamic> healthData = [];
   bool isLoading = true;
+  ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     fetchHealthData();
+    _scrollController.addListener(() {
+      setState(() {});
+    });
   }
 
   Future<void> fetchHealthData() async {
     try {
       final response =
-          await http.get(Uri.parse('http://172.24.45.29:5000/health-data'));
+          await http.get(Uri.parse('http://192.168.0.158:5000/health-data'));
       print('Response status: ${response.statusCode}');
 
       if (response.statusCode == 200) {
@@ -34,7 +38,7 @@ class _RecordscreenState extends State<Recordscreen> {
           healthData = json.decode(response.body);
           isLoading = false;
         });
-        print('Fetched data: $healthData');
+        //print('Fetched data: $healthData');
       } else {
         print('Failed to fetch data: ${response.statusCode}');
         setState(() {
@@ -67,14 +71,20 @@ class _RecordscreenState extends State<Recordscreen> {
               child: isLoading
                   ? Center(child: CircularProgressIndicator())
                   : ListView.builder(
+                      controller: _scrollController,
                       itemCount: healthData.length,
                       itemBuilder: (context, index) {
                         final record = healthData[index];
 
-                        // Calculate the opacity for each item
-                        double opacity = 1.0 - (index * 0.2);
-                        opacity = opacity.clamp(
-                            0.2, 1.0); // Ensure minimum opacity is 0.2
+                        // Calculate the scroll position
+                        double scrollOffset = _scrollController.offset;
+
+                        // Calculate the current position of the container
+                        double position = index * (healthData.length) - scrollOffset;
+
+                        // Calculate the opacity for each item with minimum 0.2
+                        double opacity = 1.0 - (position / healthData.length) * 0.5;
+                        opacity = opacity.clamp(0.8, 1.0);
 
                         // Wrap the widget with padding if it's the first item
                         Widget listItem = ScrollableList(

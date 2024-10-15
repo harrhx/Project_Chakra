@@ -2,10 +2,9 @@ import "package:flutter/material.dart";
 import "package:chakra/screens/chakra.dart";
 import 'dart:async';
 import 'package:chakra/mainscreen.dart';
-
+import 'package:chakra/screens/login_Screen.dart';
 
 class Splash extends StatefulWidget {
-
   const Splash({super.key});
 
   @override
@@ -13,7 +12,6 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
-
   @override
   void initState() {
     super.initState();
@@ -23,48 +21,30 @@ class _SplashState extends State<Splash> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-  final screenwidth = MediaQuery.of(context).size.width;
-  final screenheight = MediaQuery.of(context).size.height;
+    final screenwidth = MediaQuery.of(context).size.width;
+    final screenheight = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Container(
-  width: 430,
-  height: 932,
-  padding: const EdgeInsets.only(left: 104, right: 103),
-  clipBehavior: Clip.antiAlias,
-  decoration: const BoxDecoration(color: Colors.black),
-  child: Column(
-    mainAxisSize: MainAxisSize.min,
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      Align(
-        alignment: Alignment.center,
-        child: Container(
-          width: screenwidth * 0.52, // Width adjusted relative to screen
-          height: screenheight * 0.24, // Height adjusted relative to screen
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/logo.png'),
-              fit: BoxFit.fill,
+        backgroundColor: Colors.black,
+        body: Center(
+          child: Container(
+            width: screenwidth * 0.53, // Width adjusted relative to screen
+            height: screenheight * 0.24, // Height adjusted relative to screen
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/logo.png'),
+                fit: BoxFit.fill,
+              ),
             ),
           ),
-        ),
-      ),
-    ],
-  ),
-)
-    );
+        ));
   }
 }
 
-
 Route _createRoute() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const Mainscreen(),
+    pageBuilder: (context, animation, secondaryAnimation) => Mainscreen(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = 0.0;
       const end = 1.0;
