@@ -1,4 +1,3 @@
-```markdown
 # Project Chakra
 
 ## Overview
@@ -108,4 +107,4 @@ After pairing the Raspberry Pi Pico W with the app, you will be able to view SpO
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
-```
+
