@@ -99,5 +99,5 @@ After pairing the Raspberry Pi Pico W with the app, you will be able to view SpO
 - **Graphs and Analytics**: Add graphical visualization to monitor trends in health data.
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for moe details.
 
